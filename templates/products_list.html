@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Products - FarmLink{% endblock %}
+
+{% block content %}
+<h1 style="color: #2c5530; margin-bottom: 2rem;">All Products</h1>
+
+{% if products %}
+<div class="products-grid">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image %}
+            <img src="{{ product.image.url }}" alt="{{ product.name }}">
+        {% else %}
+            <div class="product-image-placeholder">{{ product.name|first|upper }}</div>
+        {% endif %}
+
+        <div class="product-name">{{ product.name }}</div>
+        <div class="product-price">GH₵{{ product.price_per_kg }}/kg</div>
+
+        <div style="font-size: 0.95rem; color: #2c5530; font-weight: 900; margin-bottom: 0.35rem; display:flex; gap:0.5rem; flex-wrap:wrap; align-items:center;">
+            <span class="badge">{{ product.condition|title }}</span>
+            <span style="color:#4b5563; font-weight:800;">
+                {% if product.is_negotiable %}Negotiable{% else %}Fixed Price{% endif %}
+            </span>
+        </div>
+
+
+        <div class="farmer-name">by {{ product.farmer_name }}</div>
+
+        {% if product.quantity_available > 0 %}
+            <a href="{% url 'product_detail' product.pk %}" class="btn btn-primary" style="padding:0.7rem 1.1rem;">View Details</a>
+        {% else %}
+            <div class="btn btn-secondary" style="background: #ccc; color:#374151; padding:0.7rem 1.1rem;">Out of Stock</div>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<div style="text-align: center; padding: 4rem; background: white; border-radius: 12px;">
+    <h2>No products available yet.</h2>
+    <p>Admin can add products from the <a href="{% url 'admin:index' %}">admin panel</a>.</p>
+</div>
+{% endif %}
+{% endblock %}
+

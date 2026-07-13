@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+
+{% block title %}Contact Us - FarmLink{% endblock %}
+
+{% block content %}
+
+<!-- Contact & Social links section -->
+<section class="section">
+  <div class="container">
+    <header class="section-header">
+      <h2 class="section-title">Contact Us</h2>
+      <p class="section-lead">Reach our team for partnerships, support, and delivery questions.</p>
+    </header>
+
+    <div class="contact-grid">
+      <!-- Contact details -->
+      <div class="card contact-card">
+        <h3 class="about-subtitle">Get in touch</h3>
+
+        <div class="contact-row">
+          <div class="contact-label">Email</div>
+          <div class="contact-value">
+            <a class="contact-link" href="mailto:michaelsworkshop.now@gmail.com">michaelsworkshop.now@gmail.com</a>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-label">Phone Numbers</div>
+          <div class="contact-value">
+            <div><a class="contact-link" href="tel:+233543817653">+233 (0) 543 817 653</a></div>
+            <div style="margin-top: 0.35rem;"><a class="contact-link" href="tel:+233595047772">+233 (0) 595 047 772</a></div>
+          </div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Ghana</div>
+        </div>
+
+        <div class="contact-row">
+          <div class="contact-label">WhatsApp</div>
+          <div class="contact-value">
+            <a class="btn btn-primary" href="https://wa.me/message/RLJBY7OKEGJTL1" target="_blank" rel="noopener">
+              Chat on WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div class="contact-actions">
+          <a class="icon-btn" href="tel:+233543817653" aria-label="Call FarmLink">
+            <span class="icon-btn-inner">📞</span>
+            <span>Call</span>
+          </a>
+          <a class="icon-btn" href="mailto:michaelsworkshop.now@gmail.com" aria-label="Email FarmLink">
+            <span class="icon-btn-inner">✉️</span>
+            <span>Email</span>
+          </a>
+          <a class="icon-btn" href="https://wa.me/message/RLJBY7OKEGJTL1" target="_blank" rel="noopener" aria-label="WhatsApp FarmLink">
+            <span class="icon-btn-inner">💬</span>
+            <span>WhatsApp</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Social links -->
+      <div class="card contact-card">
+        <h3 class="about-subtitle">Social Links</h3>
+        <p class="about-text" style="margin-bottom: 1rem;">
+          Follow FarmLink for updates, farmer highlights, and delivery news.
+        </p>
+
+        <div class="social-grid">
+          <a class="social-icon" href="https://vm.tiktok.com/ZS9dwjnPoKXqL-uIk9H/" target="_blank" rel="noopener">
+            <span class="social-emoji">🎵</span>
+            <span class="social-name">TikTok</span>
+          </a>
+
+          <a class="social-icon" href="https://www.linkedin.com/in/michael-aidoo-518893267" target="_blank" rel="noopener">
+            <span class="social-emoji">in</span>
+            <span class="social-name">LinkedIn</span>
+          </a>
+
+          <a class="social-icon" href="https://www.instagram.com/genz_solutionist" target="_blank" rel="noopener">
+            <span class="social-emoji"></span>
+            <span class="social-name">Instagram</span>
+          </a>
+        </div>
+
+        <div class="card" style="margin-top: 1.25rem; padding: 1.25rem;">
+          <div class="about-subtitle" style="margin-bottom: 0.5rem;">Quick info</div>
+          <div class="muted">
+            We respond fastest during business hours. For order support, use the Order Lookup page.
+          </div>
+          <div style="margin-top: 1rem;">
+            <a class="btn btn-outline" href="{% url 'order_lookup' %}">Track an Order</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% endblock %}
+

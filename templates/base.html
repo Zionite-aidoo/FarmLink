@@ -1,0 +1,93 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}FarmLink - Fresh Vegetables{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="{% url 'home' %}" class="logo">FarmLink</a>
+            <ul class="nav-menu">
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'product_list' %}">Products</a></li>
+                <li><a href="{% url 'cart' %}">Cart</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="main-content">
+        {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    {# Professional footer sections (About, Impact, Contact, Social Links) #}
+    <footer class="footer">
+        <div class="footer-inner footer-professional">
+            <div>
+                <div class="footer-brand">FarmLink</div>
+                <p>Fresh produce, delivered fast—connecting Ghanaian farmers to reliable buyers.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4>About</h4>
+                <ul class="footer-links">
+                    <li><a href="{% url 'about' %}">Who we are</a></li>
+                    <li><a href="{% url 'about' %}#how-we-deliver">How we deliver</a></li>
+                    <li><a href="{% url 'about' %}#our-impact">Impact</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4>Contact</h4>
+                <ul class="footer-links">
+                    <li><a href="{% url 'contact' %}">Contact page</a></li>
+                    <li><a href="mailto:michaelsworkshop.now@gmail.com">michaelsworkshop.now@gmail.com</a></li>
+                    <li><a href="tel:+233543817653">+233 (0) 543 817 653</a></li>
+                    <li><a href="{% url 'order_lookup' %}">Track an Order</a></li>
+
+                </ul>
+
+                <div class="footer-contact-actions">
+                    <a class="footer-icon" href="tel:+233543817653" aria-label="Call">📞</a>
+                    <a class="footer-icon" href="mailto:michaelsworkshop.now@gmail.com" aria-label="Email">✉️</a>
+                    <a class="footer-icon" href="https://wa.me/message/RLJBY7OKEGJTL1" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+                </div>
+            </div>
+
+            <div class="footer-col">
+                <h4>Social Links</h4>
+                <ul class="footer-links">
+                    <li><a href="https://vm.tiktok.com/ZS9dwjnPoKXqL-uIk9H/" target="_blank" rel="noopener">TikTok</a></li>
+                    <li><a href="https://www.linkedin.com/in/michael-aidoo-518893267" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a href="https://www.instagram.com/genz_solutionist" target="_blank" rel="noopener">Instagram</a></li>
+                </ul>
+
+                <div class="footer-social-icons">
+                    <a class="social-icon-btn" href="https://vm.tiktok.com/ZS9dwjnPoKXqL-uIk9H/" target="_blank" rel="noopener" aria-label="TikTok">🎵</a>
+                    <a class="social-icon-btn" href="https://www.linkedin.com/in/michael-aidoo-518893267" target="_blank" rel="noopener" aria-label="LinkedIn">in</a>
+                    <a class="social-icon-btn" href="https://www.instagram.com/genz_solutionist" target="_blank" rel="noopener" aria-label="Instagram">📸</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div>© 2026 FarmLink. Fresh from farm to table.</div>
+            <div>
+                <a href="{% url 'home' %}#farmer-registration" class="footer-bottom-link">Farmer Registration</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
+

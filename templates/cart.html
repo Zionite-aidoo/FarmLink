@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+
+{% block title %}Cart - FarmLink{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 0 auto;">
+    <h1 style="color: #2c5530; margin-bottom: 2rem;">Shopping Cart</h1>
+
+    {% if cart_items %}
+    <table class="cart-table">
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Price</th>
+                <th>Quantity</th>
+                <th>Subtotal</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in cart_items %}
+            <tr>
+                <td>
+                    <div style="font-weight:1000; color:#14532d; margin-bottom:0.25rem;">{{ item.product.name }}</div>
+                    <div style="font-weight:900; color:#2c5530; font-size:0.95rem;">Freshness: {{ item.product.condition|title }}</div>
+                </td>
+                <td>GH₵{{ item.product.price_per_kg }}/kg</td>
+
+                <td>{{ item.quantity }}kg</td>
+                <td>GH₵{{ item.subtotal }}</td>
+                <td>
+                    <form method="post" action="{% url 'cart_update' item.product.pk %}" style="display: inline;">
+                        {% csrf_token %}
+                        <input type="number" name="quantity" value="{{ item.quantity }}" min="0" max="{{ item.product.quantity_available }}" style="width: 90px;">
+                        <button type="submit" class="btn" style="padding: 0.35rem 0.85rem; margin-left: 0.5rem; width: auto;">Update</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+        <tfoot>
+            <tr class="total-row">
+                <td colspan="3"><strong>Total:</strong></td>
+                <td><strong>GH₵{{ total }}</strong></td>
+                <td></td>
+            </tr>
+        </tfoot>
+    </table>
+
+    <div style="text-align: right; margin-top: 2rem;">
+        <a href="{% url 'checkout' %}" class="btn btn-primary" style="font-size: 1.2rem; padding: 1rem 3rem;">Proceed to Checkout</a>
+        <a href="{% url 'product_list' %}" class="btn btn-secondary" style="margin-left: 1rem;">Continue Shopping</a>
+    </div>
+
+    {% else %}
+    <div style="text-align: center; padding: 4rem; background: white; border-radius: 12px;">
+        <h2>Your cart is empty</h2>
+        <p><a href="{% url 'product_list' %}">Browse products</a></p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+

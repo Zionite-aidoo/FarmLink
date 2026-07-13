@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout - FarmLink{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto;">
+    <h1 style="color: #2c5530; margin-bottom: 2rem;">Checkout</h1>
+    
+    <div style="background: white; padding: 2rem; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); margin-bottom: 2rem;">
+        <h3>Order Summary</h3>
+        {% with cart=request.session.cart %}
+        {% if cart %}
+        {% load cart_total from cart_tags %}
+        <p><strong>Total: GH₵{{ cart_total }}</strong></p>
+        {% endif %}
+        {% endwith %}
+
+    </div>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="form-group">
+            <label for="customer_name">Full Name *</label>
+            <input type="text" id="customer_name" name="customer_name" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="phone">Phone Number *</label>
+            <input type="tel" id="phone" name="phone" required>
+        </div>
+        
+        <div class="form-group">
+            <label for="address">Delivery Address *</label>
+            <textarea id="address" name="address" rows="4" required></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label for="payment_method">Payment Method *</label>
+            <select id="payment_method" name="payment_method" required>
+                <option value="mobile_money" selected>Mobile Money</option>
+                <option value="cash_on_delivery">Cash on Delivery</option>
+            </select>
+        </div>
+
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <button type="submit" class="btn" style="flex: 1 1 220px; font-size: 1.2rem;">Place Order</button>
+            <a href="{% url 'cart' %}" class="btn btn-secondary" style="flex: 1 1 220px;">Back to Cart</a>
+        </div>
+
+    </form>
+</div>
+{% endblock %}
+

@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Lookup - FarmLink{% endblock %}
+
+{% block content %}
+<div style="max-width: 900px; margin: 0 auto;">
+    <h1 style="color: #2c5530; margin-bottom: 2rem;">Track Your Order</h1>
+
+    <div class="panel">
+        <h2 style="margin-bottom: 1rem;">Enter your phone number</h2>
+        <p style="color: #666; margin-bottom: 1.5rem; font-weight: 800;">
+            We’ll show all orders placed using this phone number.
+        </p>
+
+        <form method="post" class="form">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="phone">Phone Number *</label>
+                <input type="tel" id="phone" name="phone" placeholder="e.g. 0241234567" value="{{ lookup_phone }}" required>
+            </div>
+            <button type="submit" class="btn" style="max-width: 320px;">Lookup Orders</button>
+        </form>
+    </div>
+
+    <div style="margin-top: 2rem;">
+        {% if orders is not None %}
+            {% if orders %}
+                <div class="panel">
+                    <h2 style="margin-bottom: 1rem;">Orders for {{ lookup_phone }}</h2>
+                    <div class="orders-list">
+                        {% for order in orders %}
+                        <div class="order-card">
+                            <div class="order-card-header">
+                                <div><strong>Order #{{ order.id }}</strong></div>
+                                <div class="muted">{{ order.created_at|date:"M d, Y" }}</div>
+                            </div>
+
+                            <div class="order-meta">
+                                <div><span class="label">Total:</span> GH₵{{ order.total_price }}</div>
+                                <div><span class="label">Payment:</span> {{ order.payment_status|capfirst }}</div>
+                                <div><span class="label">Status:</span> {{ order.order_status|capfirst }}</div>
+                            </div>
+
+                            <div class="order-items">
+                                <div class="label" style="margin-bottom: 0.5rem;">Items</div>
+                                <ul>
+                                    {% for item_id, qty in order.items.items %}
+                                        <li><strong>Qty:</strong> {{ qty }}kg</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+
+                            <div class="order-card-footer">
+                                <a href="{% url 'order_success' order.id %}" class="btn btn-secondary" style="width:auto; padding:0.6rem 1rem;">View</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% else %}
+                <div class="panel" style="text-align:center;">
+                    <h2 style="margin-bottom: 0.5rem;">No orders found</h2>
+                    <p style="color:#666; font-weight: 800;">Try again with a different phone number.</p>
+                </div>
+            {% endif %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
+

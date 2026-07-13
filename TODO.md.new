@@ -1,0 +1,11 @@
+# FarmLink - Render Deployment Checklist (Update)
+
+- [x] Set DEBUG=False in `farm_link/settings.py`
+- [x] Set ALLOWED_HOSTS via Render env var
+- [x] Configure DATABASE_URL support in `farm_link/settings.py`
+- [x] Add Procfile for Render gunicorn
+- [ ] Add required Render start/build steps (collectstatic + migrations)
+- [ ] Commit/push to GitHub
+- [ ] Create Render Web Service + Postgres
+- [ ] Run deploy and smoke test
+

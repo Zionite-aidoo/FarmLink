@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Order Success - FarmLink{% endblock %}
+
+{% block content %}
+<div style="max-width: 600px; margin: 0 auto; text-align: center;">
+    <div style="background: linear-gradient(135deg, #4CAF50, #81C784); color: white; padding: 4rem 2rem; border-radius: 20px; box-shadow: 0 15px 40px rgba(76, 175, 80, 0.3);">
+        <div style="font-size: 5rem; margin-bottom: 1rem;">✓</div>
+        <h1 style="font-size: 2.5rem; margin-bottom: 1rem;">Order #{{ order.id }} Placed Successfully!</h1>
+        <p style="font-size: 1.2rem;"><strong>Total: GH₵{{ order.total_price }}</strong></p>
+
+        <div style="background: rgba(255,255,255,0.15); padding: 1.2rem; border-radius: 12px; display: inline-block; text-align: left;">
+            <p style="font-size: 1.1rem; margin-bottom: 0.4rem;"><strong>Payment Status:</strong> {{ order.payment_status|capfirst }}</p>
+            <p style="font-size: 1.1rem; margin-bottom: 0.4rem;"><strong>Order Status:</strong> {{ order.order_status|capfirst }}</p>
+            <p style="font-size: 1.1rem; margin-bottom: 0.4rem;"><strong>Transaction Ref:</strong> {{ order.transaction_reference }}</p>
+        </div>
+
+        <p style="font-size: 1.2rem; margin-bottom: 2rem;">Thank you for your order. Our farmer will contact you soon to confirm delivery details.</p>
+        <a href="{% url 'product_list' %}" class="btn" style="background: white; color: #4CAF50; padding: 1rem 3rem; font-size: 1.1rem;">Browse More Products</a>
+
+    </div>
+</div>
+{% endblock %}
+

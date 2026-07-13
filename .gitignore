@@ -1,0 +1,22 @@
+# Django / Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.sqlite3
+*.db
+
+# Virtualenv
+venv/
+.venv/
+
+# Django media (optional)
+media/
+
+# Environment variables
+.env
+.env.*
+
+# Build artifacts
+*.log
+

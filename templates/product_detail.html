@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ product.name }} - FarmLink{% endblock %}
+
+{% block content %}
+<div class="product-detail">
+    <div class="product-detail-card">
+        <div class="product-detail-image">
+            {% if product.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.name }}">
+            {% else %}
+                <div class="product-image-placeholder">{{ product.name|first|upper }}</div>
+            {% endif %}
+        </div>
+
+        <div>
+            <h1 class="product-name" style="font-size: 2.2rem; margin-bottom: 0.5rem;">{{ product.name }}</h1>
+            <div class="product-price" style="font-size: 2rem; margin: 1rem 0;">GH₵{{ product.price_per_kg }}/kg</div>
+
+            <div style="font-size: 1.1rem; margin-bottom: 1rem; color: #2c5530; font-weight: 900; display:flex; gap:0.75rem; flex-wrap:wrap; align-items:center;">
+                <span class="badge">{{ product.condition|title }}</span>
+                <span style="color:#4b5563; font-weight:800;">
+                    {% if product.is_negotiable %}Negotiable Price{% else %}Fixed Price{% endif %}
+                </span>
+            </div>
+
+
+            <div class="farmer-name" style="font-size: 1.2rem; margin-bottom: 2rem;">by {{ product.farmer_name }}</div>
+
+            <p><strong>Available:</strong> {{ product.quantity_available }}kg</p>
+            <p style="margin-bottom: 2rem; color: #6b7280; font-weight: 800;">Listed: {{ product.created_at|date:"M d, Y" }}</p>
+
+            {% if product.quantity_available > 0 %}
+                <form method="post" action="{% url 'cart_add' product.pk %}">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label>Quantity (kg):</label>
+                        <input type="number" name="quantity" min="1" max="{{ product.quantity_available }}" value="1" required>
+                    </div>
+
+                    <div class="product-detail-actions" style="display:flex; gap:1rem; flex-wrap:wrap; align-items:center;">
+                        <button type="submit" class="btn btn-primary" style="font-size: 1.1rem; padding: 0.95rem 1.6rem;">
+                            Add to Cart
+                        </button>
+                        <a href="{% url 'product_list' %}" class="btn btn-secondary" style="padding: 0.95rem 1.2rem;">Back to Products</a>
+                    </div>
+                </form>
+            {% else %}
+                <div class="btn btn-secondary" style="font-size: 1.2rem; padding: 1.2rem 1.5rem; background:#ccc; color:#374151;">
+                    Out of Stock
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}
+
