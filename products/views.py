@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.decorators.http import require_http_methods
 from django.contrib import messages
-from django.contrib.auth.decorators import login_not_required
 from decimal import Decimal
 from django.utils import timezone
 from .models import Product, Order
@@ -153,8 +152,6 @@ def checkout(request):
 
     return render(request, 'checkout.html', context)
 
-
-@login_not_required
 
 def order_success(request, order_id):
     """Order confirmation page"""

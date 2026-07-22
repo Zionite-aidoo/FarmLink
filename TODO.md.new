@@ -1,11 +1,10 @@
-# FarmLink - Render Deployment Checklist (Update)
+# Task tracking
 
-- [x] Set DEBUG=False in `farm_link/settings.py`
-- [x] Set ALLOWED_HOSTS via Render env var
-- [x] Configure DATABASE_URL support in `farm_link/settings.py`
-- [x] Add Procfile for Render gunicorn
-- [ ] Add required Render start/build steps (collectstatic + migrations)
-- [ ] Commit/push to GitHub
-- [ ] Create Render Web Service + Postgres
-- [ ] Run deploy and smoke test
+## Plan for fixing errors + running code
+1. Run Django system checks + migrations, find current failing errors.
+2. Run tests (if any) and fix template/static issues.
+3. Fix compile/runtime errors found by `python manage.py check`, `migrate`, and `runserver`/smoke tests.
+4. Ensure checkout/order flow works (cart add/update/checkout/order_success/order_lookup).
+5. Re-run `python -m compileall`, `python manage.py check` after changes.
+
 

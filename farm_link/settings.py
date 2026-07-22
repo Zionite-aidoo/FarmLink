@@ -27,11 +27,15 @@ SECRET_KEY = 'django-insecure-qu==rvc8ifmxyg%ek7*3w42_)zsprz-09&=026f4+*&@ca$v19
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # Render will provide env vars; for safety default to False.
-DEBUG = False
+DEBUG = True
 
-# Allow Render domain(s)
+# Allow Render domain(s) + local dev
+_render_host = os.getenv('RENDER_EXTERNAL_URL', '').replace('https://', '').replace('http://', '').strip()
 ALLOWED_HOSTS = [
-    os.getenv('RENDER_EXTERNAL_URL', '').replace('https://', '').replace('http://', '').strip(),
+    _render_host,
+    'localhost',
+    '127.0.0.1',
+    '[::1]',
 ]
 # Remove empty entries
 ALLOWED_HOSTS = [h for h in ALLOWED_HOSTS if h]
@@ -54,6 +58,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -98,9 +103,21 @@ DATABASES = {
 # When DATABASE_URL is present, use it instead of SQLite.
 DATABASE_URL = os.getenv('DATABASE_URL')
 if DATABASE_URL:
-    import dj_database_url
-    
-    DATABASES['default'] = dj_database_url.parse(DATABASE_URL, conn_max_age=600)
+    # Avoid extra dependencies (dj-database-url) by parsing the common Render URL format.
+    # Example: postgresql://USER:PASSWORD@HOST:PORT/DBNAME
+    import re
+    from urllib.parse import urlparse
+
+    parsed = urlparse(DATABASE_URL)
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': parsed.path.lstrip('/'),
+        'USER': parsed.username,
+        'PASSWORD': parsed.password,
+        'HOST': parsed.hostname,
+        'PORT': str(parsed.port or 5432),
+    }
+
 
 
 
@@ -143,6 +160,9 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']  # Development static files
+
+# Used by collectstatic for Render/production deployments
+STATIC_ROOT = BASE_DIR / 'staticfiles'
 
 # Media files
 MEDIA_URL = '/media/'

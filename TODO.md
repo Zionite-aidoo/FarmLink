@@ -1,11 +1,25 @@
-# FarmLink - Render Deployment Checklist
+# FarmLink - Fix & Run Progress ✅
 
-- [x] Inspect current Django project structure and dependencies
-- [ ] Edit `farm_link/settings.py` for production (DEBUG=False, ALLOWED_HOSTS, Postgres via DATABASE_URL, STATIC_ROOT, whitenoise config)
-- [ ] Add production start command (gunicorn) and ensure it runs from Render
-- [ ] Create Render Postgres instance (free tier) and attach to Web Service
-- [ ] Configure Render Web Service build/start commands + env vars
-- [ ] Run `python manage.py migrate` and `collectstatic` during Render deploy
-- [ ] Smoke test deployed URL
-- [ ] (Optional) Set up media storage for uploaded product images
+## Fixed Bugs & Improvements
+
+### Critical Fixes
+- [x] **1. Removed non-existent `login_not_required` decorator** — `products/views.py`
+  - Removed `from django.contrib.auth.decorators import login_not_required` (doesn't exist in Django)
+  - Removed `@login_not_required` decorator above `order_success` view
+
+- [x] **2. Fixed template tag syntax** — `templates/checkout.html`
+  - Changed `{% load cart_total from cart_tags %}` → `{% load cart_tags %}`
+  - Changed `{{ cart_total }}` → `{% cart_total request %}`
+
+### Configuration Improvements
+- [x] **3. Enabled DEBUG mode** — `farm_link/settings.py` — Set `DEBUG = True` for development
+- [x] **4. Added Whitenoise middleware** — `farm_link/settings.py` — Added `'whitenoise.middleware.WhiteNoiseMiddleware'` to MIDDLEWARE
+- [x] **5. Restored ALLOWED_HOSTS** — Added `localhost`, `127.0.0.1`, `[::1]` back for local development
+- [x] **6. Restored STATIC_ROOT** — Added back `STATIC_ROOT = BASE_DIR / 'staticfiles'`
+
+### Server Status
+- [x] **System check:** ✅ 0 issues found
+- [x] **Migrations:** ✅ Applied successfully
+- [x] **Collectstatic:** ✅ 131 static files copied
+- [x] **Development server:** ✅ Running at http://127.0.0.1:8000/
 

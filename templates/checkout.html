@@ -10,8 +10,8 @@
         <h3>Order Summary</h3>
         {% with cart=request.session.cart %}
         {% if cart %}
-        {% load cart_total from cart_tags %}
-        <p><strong>Total: GH₵{{ cart_total }}</strong></p>
+        {% load cart_tags %}
+        <p><strong>Total: GH₵{% cart_total request %}</strong></p>
         {% endif %}
         {% endwith %}
 

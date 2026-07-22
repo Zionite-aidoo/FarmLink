@@ -1,22 +1,7 @@
-# Django / Python
+venv/
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-*.sqlite3
-*.db
-
-# Virtualenv
-venv/
-.venv/
-
-# Django media (optional)
-media/
-
-# Environment variables
+db.sqlite3
 .env
-.env.*
-
-# Build artifacts
-*.log
-
+media/
+staticfiles/
