@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/6.0/ref/settings/
 
 from pathlib import Path
 import os
+from decouple import config
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,11 +24,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-qu==rvc8ifmxyg%ek7*3w42_)zsprz-09&=026f4+*&@ca$v19'
+SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-qu==rvc8ifmxyg%ek7*3w42_)zsprz-09&=026f4+*&@ca$v19')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# Render will provide env vars; for safety default to False.
-DEBUG = True
+DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
 
 # Allow Render domain(s) + local dev
 _render_host = os.getenv('RENDER_EXTERNAL_URL', '').replace('https://', '').replace('http://', '').strip()
@@ -40,6 +40,15 @@ ALLOWED_HOSTS = [
 # Remove empty entries
 ALLOWED_HOSTS = [h for h in ALLOWED_HOSTS if h]
 
+# CSRF Trusted Origins — add Render domain automatically
+_render_origin = os.getenv('RENDER_EXTERNAL_URL', '').strip()
+CSRF_TRUSTED_ORIGINS = [
+    'http://localhost:8000',
+    'http://127.0.0.1:8000',
+]
+if _render_origin:
+    CSRF_TRUSTED_ORIGINS.append(_render_origin)
+
 
 
 # Application definition
@@ -51,6 +60,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    'cloudinary_storage',  # Cloudinary storage (must be before 'cloudinary')
+    'cloudinary',          # Cloudinary SDK
 
     'products',  # Our app
 
@@ -167,6 +179,13 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
+
+# Cloudinary storage for images (production)
+# Set CLOUDINARY_URL in Render env vars (format: cloudinary://api_key:api_secret@cloud_name)
+# When CLOUDINARY_URL is set, media uploads go to Cloudinary automatically.
+if os.getenv('CLOUDINARY_URL'):
+    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+    CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field

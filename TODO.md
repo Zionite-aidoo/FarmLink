@@ -1,25 +1,29 @@
-# FarmLink - Fix & Run Progress ✅
+# FarmLink → Render Deployment 🚀
 
-## Fixed Bugs & Improvements
+## Task List
 
-### Critical Fixes
-- [x] **1. Removed non-existent `login_not_required` decorator** — `products/views.py`
-  - Removed `from django.contrib.auth.decorators import login_not_required` (doesn't exist in Django)
-  - Removed `@login_not_required` decorator above `order_success` view
+### Step 1: Update runtime.txt
+- [x] Change Python version to Render-compatible version
 
-- [x] **2. Fixed template tag syntax** — `templates/checkout.html`
-  - Changed `{% load cart_total from cart_tags %}` → `{% load cart_tags %}`
-  - Changed `{{ cart_total }}` → `{% cart_total request %}`
+### Step 2: Update requirements.txt
+- [x] Add cloudinary and django-cloudinary-storage
+- [x] Fix file encoding
 
-### Configuration Improvements
-- [x] **3. Enabled DEBUG mode** — `farm_link/settings.py` — Set `DEBUG = True` for development
-- [x] **4. Added Whitenoise middleware** — `farm_link/settings.py` — Added `'whitenoise.middleware.WhiteNoiseMiddleware'` to MIDDLEWARE
-- [x] **5. Restored ALLOWED_HOSTS** — Added `localhost`, `127.0.0.1`, `[::1]` back for local development
-- [x] **6. Restored STATIC_ROOT** — Added back `STATIC_ROOT = BASE_DIR / 'staticfiles'`
+### Step 3: Update settings.py
+- [x] SECRET_KEY via env var
+- [x] DEBUG via env var
+- [x] CSRF_TRUSTED_ORIGINS
+- [x] Cloudinary storage config for media files
+- [x] Added cloudinary_storage & cloudinary to INSTALLED_APPS
 
-### Server Status
-- [x] **System check:** ✅ 0 issues found
-- [x] **Migrations:** ✅ Applied successfully
-- [x] **Collectstatic:** ✅ 131 static files copied
-- [x] **Development server:** ✅ Running at http://127.0.0.1:8000/
+### Step 4: Fix Git Remote
+- [x] Set remote to https://github.com/Zionite-aidoo/FarmLink.git
+
+### Step 5: Commit & Push to GitHub
+- [ ] Stage all changes
+- [ ] Commit with deployment message
+- [ ] Push to main branch
+
+### Step 6: Render Setup Instructions
+- [ ] Provide step-by-step Render web service configuration
 
