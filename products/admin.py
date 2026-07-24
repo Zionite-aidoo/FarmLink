@@ -3,7 +3,7 @@ from .models import Product, Order
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'farmer_name', 'price_per_kg', 'quantity_available', 'condition', 'is_negotiable', 'created_at')
+    list_display = ('name', 'image', 'image_url', 'farmer_name', 'price_per_kg', 'quantity_available', 'condition', 'is_negotiable', 'created_at')
     list_filter = ('farmer_name', 'condition', 'is_negotiable', 'created_at')
     search_fields = ('name', 'farmer_name')
     readonly_fields = ('created_at',)

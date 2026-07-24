@@ -28,8 +28,15 @@
       </div>
     </div>
 
-    <div class="hero-media" role="img" aria-label="Fresh agriculture produce">
-      {% if featured_products and featured_products.0.image %}
+<div class="hero-media" role="img" aria-label="Fresh agriculture produce">
+      {% if featured_products and featured_products.0.image_url %}
+        <img
+          src="{{ featured_products.0.image_url }}"
+          alt="Fresh farm produce"
+          class="hero-image"
+          loading="eager"
+        />
+      {% elif featured_products and featured_products.0.image %}
         <img
           src="{{ featured_products.0.image.url }}"
           alt="Fresh farm produce"

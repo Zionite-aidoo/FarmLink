@@ -12,6 +12,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kwame Asante",
         "condition": "fresh",
         "is_negotiable": True,
+        "image_url": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&h=300&fit=crop",
     },
     {
         "name": "Ripe Tomatoes",
@@ -20,6 +21,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Ama Mensah",
         "condition": "ripe",
         "is_negotiable": True,
+        "image_url": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&h=300&fit=crop",
     },
     {
         "name": "White Yams",
@@ -28,6 +30,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kofi Yeboah",
         "condition": "fresh",
         "is_negotiable": False,
+        "image_url": "https://images.unsplash.com/photo-1583321506900-5514f7a52da8?w=400&h=300&fit=crop",
     },
     {
         "name": "Cassava",
@@ -36,6 +39,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Akua Ofori",
         "condition": "fresh",
         "is_negotiable": True,
+        "image_url": "https://images.unsplash.com/photo-1584661156681-540e80a161d3?w=400&h=300&fit=crop",
     },
     {
         "name": "Garden Eggs",
@@ -44,6 +48,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Yaw Adjei",
         "condition": "fresh",
         "is_negotiable": True,
+        "image_url": "https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=400&h=300&fit=crop",
     },
     {
         "name": "Ripe Plantain",
@@ -52,6 +57,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Esi Baiden",
         "condition": "ripe",
         "is_negotiable": False,
+        "image_url": "https://images.unsplash.com/photo-1571771894821-ce9b6ba11d94?w=400&h=300&fit=crop",
     },
     {
         "name": "Fresh Pepper (Shito)",
@@ -60,6 +66,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kwame Asante",
         "condition": "fresh",
         "is_negotiable": True,
+        "image_url": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=400&h=300&fit=crop",
     },
     {
         "name": "Good Condition Oranges",
@@ -68,6 +75,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Nana Agyemang",
         "condition": "good",
         "is_negotiable": True,
+        "image_url": "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=400&h=300&fit=crop",
     },
 ]
 

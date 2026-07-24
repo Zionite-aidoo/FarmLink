@@ -5,6 +5,7 @@ import json
 class Product(models.Model):
     name = models.CharField(max_length=200)
     image = models.ImageField(upload_to='products/', blank=True, null=True)
+    image_url = models.URLField(blank=True, null=True, help_text="External image URL (e.g. Unsplash) — overrides uploaded image")
     price_per_kg = models.DecimalField(max_digits=10, decimal_places=2)
     quantity_available = models.IntegerField()
     farmer_name = models.CharField(max_length=200)
