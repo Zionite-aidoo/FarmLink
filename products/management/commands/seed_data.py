@@ -97,18 +97,27 @@ class Command(BaseCommand):
 
         # ── Products ────────────────────────────────────────────────
         existing = Product.objects.count()
-        if existing > 0:
+        if existing == 0:
+            # Fresh seed — create everything
+            for data in SAMPLE_PRODUCTS:
+                Product.objects.create(**data)
             self.stdout.write(
-                f"Found {existing} existing product(s) — skipping seed."
+                self.style.SUCCESS(
+                    f"Seeded {len(SAMPLE_PRODUCTS)} sample products successfully!"
+                )
             )
-            return
-
-        for data in SAMPLE_PRODUCTS:
-            Product.objects.create(**data)
-
-        self.stdout.write(
-            self.style.SUCCESS(
-                f"Seeded {len(SAMPLE_PRODUCTS)} sample products successfully!"
+        else:
+            # Re-deploy: update existing products with image_url values
+            updated = 0
+            for data in SAMPLE_PRODUCTS:
+                name = data["name"]
+                image_url = data.get("image_url", "")
+                count = Product.objects.filter(name=name).update(image_url=image_url)
+                if count:
+                    updated += count
+            self.stdout.write(
+                self.style.SUCCESS(
+                    f"Found {existing} existing product(s) — updated {updated} with image_urls."
+                )
             )
-        )
 
