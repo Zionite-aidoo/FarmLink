@@ -23,10 +23,10 @@
             <tr>
                 <td>
                     <div style="display:flex; align-items:center; gap:0.75rem;">
-                    {% if item.product.image_url %}
-                        <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" style="width:50px; height:50px; object-fit:cover; border-radius:10px;">
-                    {% elif item.product.image %}
+                    {% if item.product.image %}
                         <img src="{{ item.product.image.url }}" alt="{{ item.product.name }}" style="width:50px; height:50px; object-fit:cover; border-radius:10px;">
+                    {% elif item.product.image_url %}
+                        <img src="{{ item.product.image_url }}" alt="{{ item.product.name }}" style="width:50px; height:50px; object-fit:cover; border-radius:10px;">
                     {% else %}
                         <div style="width:50px; height:50px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:1.8rem; {% product_card_style item.product %}">
                             {% product_emoji item.product %}
