@@ -12,7 +12,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kwame Asante",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/maize/400/300",
     },
     {
         "name": "Ripe Tomatoes",
@@ -21,7 +21,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Ama Mensah",
         "condition": "ripe",
         "is_negotiable": True,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/tomatoes/400/300",
     },
     {
         "name": "Yams",
@@ -30,7 +30,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kofi Yeboah",
         "condition": "fresh",
         "is_negotiable": False,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/yams/400/300",
     },
     {
         "name": "Cassava",
@@ -39,7 +39,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Akua Ofori",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/cassava/400/300",
     },
     {
         "name": "Garden Eggs",
@@ -48,7 +48,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Yaw Adjei",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/garden-eggs/400/300",
     },
     {
         "name": "Ripe Plantain",
@@ -57,7 +57,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Esi Baiden",
         "condition": "ripe",
         "is_negotiable": False,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/plantain/400/300",
     },
     {
         "name": "Unripe Plantain",
@@ -66,7 +66,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Esi Baiden",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/unripe-plantain/400/300",
     },
     {
         "name": "Fresh Pepper (Shito)",
@@ -75,7 +75,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kwame Asante",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/pepper/400/300",
     },
     {
         "name": "Good Condition Oranges",
@@ -84,7 +84,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Nana Agyemang",
         "condition": "good",
         "is_negotiable": True,
-        "image_url": "",
+        "image_url": "https://picsum.photos/seed/oranges/400/300",
     },
 ]
 
