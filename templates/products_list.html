@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load cart_tags %}
 
 {% block title %}Products - FarmLink{% endblock %}
 
@@ -12,7 +13,9 @@
         {% if product.image %}
             <img src="{{ product.image.url }}" alt="{{ product.name }}">
         {% else %}
-            <div class="product-image-placeholder">{{ product.name|first|upper }}</div>
+            <div class="product-image-placeholder" style="{% product_card_style product %}">
+                {% product_emoji product %}
+            </div>
         {% endif %}
 
         <div class="product-name">{{ product.name }}</div>
@@ -43,4 +46,6 @@
 </div>
 {% endif %}
 {% endblock %}
+
+
 
