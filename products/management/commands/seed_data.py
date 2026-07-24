@@ -12,7 +12,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kwame Asante",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1551754655-cd27e38d2076?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/2d6a4f/ffffff?text=🌽+Fresh+Maize&font=source-sans-pro",
     },
     {
         "name": "Ripe Tomatoes",
@@ -21,7 +21,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Ama Mensah",
         "condition": "ripe",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/c1272d/ffffff?text=🍅+Ripe+Tomatoes&font=source-sans-pro",
     },
     {
         "name": "Yams",
@@ -30,7 +30,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kofi Yeboah",
         "condition": "fresh",
         "is_negotiable": False,
-        "image_url": "https://images.unsplash.com/photo-1590168223692-6e02a0659b7d?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/8B4513/ffffff?text=🍠+Yams&font=source-sans-pro",
     },
     {
         "name": "Cassava",
@@ -39,7 +39,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Akua Ofori",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1595446761776-ef49d58d399b?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/5c4033/ffffff?text=Cassava&font=source-sans-pro",
     },
     {
         "name": "Garden Eggs",
@@ -48,7 +48,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Yaw Adjei",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1608039829572-9b18dda7a49e?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/3d7a3d/ffffff?text=🥬+Garden+Eggs&font=source-sans-pro",
     },
     {
         "name": "Ripe Plantain",
@@ -57,7 +57,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Esi Baiden",
         "condition": "ripe",
         "is_negotiable": False,
-        "image_url": "https://images.unsplash.com/photo-1524781289445-ddf8f5695861?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/daa520/ffffff?text=🍌+Ripe+Plantain&font=source-sans-pro",
     },
     {
         "name": "Unripe Plantain",
@@ -66,7 +66,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Esi Baiden",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1571771894821-ce9b6ba11d94?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/228b22/ffffff?text=🌿+Unripe+Plantain&font=source-sans-pro",
     },
     {
         "name": "Fresh Pepper (Shito)",
@@ -75,7 +75,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Kwame Asante",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1563565375-f3fdfdbefa83?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/8b0000/ffffff?text=🌶️+Fresh+Pepper&font=source-sans-pro",
     },
     {
         "name": "Good Condition Oranges",
@@ -84,7 +84,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Nana Agyemang",
         "condition": "good",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1582979512210-99b6a53386f9?w=400&h=300&fit=crop",
+        "image_url": "https://placehold.co/400x300/ff8c00/ffffff?text=🍊+Oranges&font=source-sans-pro",
     },
 ]
 
