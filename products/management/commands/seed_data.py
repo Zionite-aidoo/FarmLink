@@ -24,13 +24,13 @@ SAMPLE_PRODUCTS = [
         "image_url": "https://images.unsplash.com/photo-1592924357228-91a4daadcfea?w=400&h=300&fit=crop",
     },
     {
-        "name": "White Yams",
+        "name": "Yams",
         "price_per_kg": 12.00,
         "quantity_available": 80,
         "farmer_name": "Kofi Yeboah",
         "condition": "fresh",
         "is_negotiable": False,
-        "image_url": "https://images.unsplash.com/photo-1583321506900-5514f7a52da8?w=400&h=300&fit=crop",
+        "image_url": "https://images.unsplash.com/photo-1590168223692-6e02a0659b7d?w=400&h=300&fit=crop",
     },
     {
         "name": "Cassava",
@@ -39,7 +39,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Akua Ofori",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1584661156681-540e80a161d3?w=400&h=300&fit=crop",
+        "image_url": "https://images.unsplash.com/photo-1595446761776-ef49d58d399b?w=400&h=300&fit=crop",
     },
     {
         "name": "Garden Eggs",
@@ -48,7 +48,7 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Yaw Adjei",
         "condition": "fresh",
         "is_negotiable": True,
-        "image_url": "https://images.unsplash.com/photo-1615485925600-97237c4fc1ec?w=400&h=300&fit=crop",
+        "image_url": "https://images.unsplash.com/photo-1608039829572-9b18dda7a49e?w=400&h=300&fit=crop",
     },
     {
         "name": "Ripe Plantain",
@@ -57,6 +57,15 @@ SAMPLE_PRODUCTS = [
         "farmer_name": "Esi Baiden",
         "condition": "ripe",
         "is_negotiable": False,
+        "image_url": "https://images.unsplash.com/photo-1524781289445-ddf8f5695861?w=400&h=300&fit=crop",
+    },
+    {
+        "name": "Unripe Plantain",
+        "price_per_kg": 6.00,
+        "quantity_available": 100,
+        "farmer_name": "Esi Baiden",
+        "condition": "fresh",
+        "is_negotiable": True,
         "image_url": "https://images.unsplash.com/photo-1571771894821-ce9b6ba11d94?w=400&h=300&fit=crop",
     },
     {
@@ -108,16 +117,37 @@ class Command(BaseCommand):
             )
         else:
             # Re-deploy: update existing products with image_url values
+            # Also handle renamed products: "White Yams" → "Yams"
+            old_name_map = {"White Yams": "Yams"}
+            for old_name, new_name in old_name_map.items():
+                old_products = Product.objects.filter(name=old_name)
+                if old_products.exists():
+                    # Check if "Yams" already exists
+                    if not Product.objects.filter(name=new_name).exists():
+                        old_products.update(name=new_name)
+                        self.stdout.write(f"Renamed '{old_name}' → '{new_name}'")
+                    else:
+                        # "Yams" already exists — delete the old one
+                        old_products.delete()
+                        self.stdout.write(f"Deleted duplicate '{old_name}' (already have '{new_name}')")
+
             updated = 0
+            created = 0
             for data in SAMPLE_PRODUCTS:
                 name = data["name"]
                 image_url = data.get("image_url", "")
-                count = Product.objects.filter(name=name).update(image_url=image_url)
-                if count:
-                    updated += count
+                matched = Product.objects.filter(name=name)
+                if matched.exists():
+                    count = matched.update(image_url=image_url)
+                    if count:
+                        updated += count
+                else:
+                    Product.objects.create(**data)
+                    created += 1
+
             self.stdout.write(
                 self.style.SUCCESS(
-                    f"Found {existing} existing product(s) — updated {updated} with image_urls."
+                    f"Found {existing} existing product(s) — updated {updated} image_urls, created {created} new products."
                 )
             )
 
