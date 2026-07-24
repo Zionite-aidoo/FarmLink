@@ -20,10 +20,10 @@
 - [x] Set remote to https://github.com/Zionite-aidoo/FarmLink.git
 
 ### Step 5: Commit & Push to GitHub
-- [ ] Stage all changes
-- [ ] Commit with deployment message
-- [ ] Push to main branch
+- [x] Stage all changes
+- [x] Commit with deployment message
+- [x] Push to main branch
 
 ### Step 6: Render Setup Instructions
-- [ ] Provide step-by-step Render web service configuration
+- [ ] Follow the instructions below to deploy on Render
 

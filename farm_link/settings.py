@@ -61,9 +61,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    'cloudinary_storage',  # Cloudinary storage (must be before 'cloudinary')
-    'cloudinary',          # Cloudinary SDK
-
     'products',  # Our app
 
 ]
@@ -179,13 +176,6 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 # Media files
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media'
-
-# Cloudinary storage for images (production)
-# Set CLOUDINARY_URL in Render env vars (format: cloudinary://api_key:api_secret@cloud_name)
-# When CLOUDINARY_URL is set, media uploads go to Cloudinary automatically.
-if os.getenv('CLOUDINARY_URL'):
-    DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
-    CLOUDINARY_URL = os.getenv('CLOUDINARY_URL')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/6.0/ref/settings/#default-auto-field
