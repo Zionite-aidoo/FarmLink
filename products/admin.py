@@ -3,9 +3,27 @@ from .models import Product, Order
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_display = ('name', 'image', 'image_url', 'farmer_name', 'price_per_kg', 'quantity_available', 'condition', 'is_negotiable', 'created_at')
+    list_display = ('name', 'farmer_name', 'price_per_kg', 'quantity_available', 'condition', 'is_negotiable', 'created_at')
     list_filter = ('farmer_name', 'condition', 'is_negotiable', 'created_at')
-    search_fields = ('name', 'farmer_name')
+    search_fields = ('name', 'farmer_name', 'description')
+    list_editable = ('price_per_kg', 'quantity_available', 'condition', 'is_negotiable')
+    list_per_page = 20
+
+    fieldsets = (
+        ('Basic Info', {
+            'fields': ('name', 'farmer_name', 'condition', 'description'),
+        }),
+        ('Pricing & Stock', {
+            'fields': ('price_per_kg', 'quantity_available', 'is_negotiable'),
+        }),
+        ('Image', {
+            'fields': ('image', 'image_url'),
+            'classes': ('collapse',),
+        }),
+        ('Timestamps', {
+            'fields': ('created_at',),
+        }),
+    )
     readonly_fields = ('created_at',)
 
 @admin.register(Order)

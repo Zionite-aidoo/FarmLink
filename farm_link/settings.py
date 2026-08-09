@@ -27,9 +27,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config('DJANGO_SECRET_KEY', default='django-insecure-qu==rvc8ifmxyg%ek7*3w42_)zsprz-09&=026f4+*&@ca$v19')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = config('DJANGO_DEBUG', default=False, cast=bool)
+DEBUG = config('DJANGO_DEBUG', default=True, cast=bool)
 
-# Allow Render domain(s) + local dev
 _render_host = os.getenv('RENDER_EXTERNAL_URL', '').replace('https://', '').replace('http://', '').strip()
 ALLOWED_HOSTS = [
     _render_host,

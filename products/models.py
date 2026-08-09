@@ -18,6 +18,7 @@ class Product(models.Model):
         ],
         default='fresh',
     )
+    description = models.TextField(blank=True, null=True, help_text="Short product description for the detail page")
     is_negotiable = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     

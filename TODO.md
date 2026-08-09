@@ -1,29 +1,25 @@
-# FarmLink → Render Deployment 🚀
+# FarmLink Fixes - Completed ✅
 
-## Task List
+## ✅ Fixed Issues
 
-### Step 1: Update runtime.txt
-- [x] Change Python version to Render-compatible version
+### 1. settings.py - Fixed DEBUG default for local development
+- [x] Changed `DEBUG` default from `False` to `True` so static files are served in development
+- [x] Fixed leading space bug on `_render_host` line
 
-### Step 2: Update requirements.txt
-- [x] Add cloudinary and django-cloudinary-storage
-- [x] Fix file encoding
+### 2. CSS - Added missing styles for About, Contact, Checkout pages
+- [x] Added `.about-grid`, `.about-card`, `.about-subtitle`, `.about-text` styles
+- [x] Added `.impact-item`, `.impact-title`, `.impact-desc` styles
+- [x] Added `.contact-grid`, `.contact-card`, `.contact-row`, `.contact-label`, `.contact-value` styles
+- [x] Added `.social-grid`, `.social-icon`, `.icon-btn`, `.icon-btn-inner` styles
+- [x] Added `.btn-secondary`, `.form-group`, `.form` styles
 
-### Step 3: Update settings.py
-- [x] SECRET_KEY via env var
-- [x] DEBUG via env var
-- [x] CSRF_TRUSTED_ORIGINS
-- [x] Cloudinary storage config for media files
-- [x] Added cloudinary_storage & cloudinary to INSTALLED_APPS
+### 3. Navigation - Added missing links to navbar
+- [x] Added About and Contact links to `base.html` navbar
 
-### Step 4: Fix Git Remote
-- [x] Set remote to https://github.com/Zionite-aidoo/FarmLink.git
+### 4. Image display - Fixed priority to match documented behavior
+- [x] Fixed all templates to check `image_url` FIRST (as documented: "overrides uploaded image")
+- [x] Fixed: `home.html` (hero + spotlight), `products_list.html`, `product_detail.html`, `cart.html`
 
-### Step 5: Commit & Push to GitHub
-- [x] Stage all changes
-- [x] Commit with deployment message
-- [x] Push to main branch
-
-### Step 6: Render Setup Instructions
-- [ ] Follow the instructions below to deploy on Render
-
+### 5. Media files - Ensured proper serving
+- [x] `media/` directory exists for uploaded images
+- [x] Static files collected via `collectstatic`
