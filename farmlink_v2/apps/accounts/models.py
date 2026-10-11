@@ -45,6 +45,17 @@ class UserManager(BaseUserManager):
             raise ValueError('A superuser must have staff and superuser permissions.')
         return self._create_user(phone, full_name, password, **extra_fields)
 
+    def get_by_natural_key(self, username):
+        keys = [username]
+        try:
+            normalized = self.normalize_phone(username)
+            if normalized not in keys:
+                keys.append(normalized)
+        except Exception:
+            pass
+        return self.get(**{f'{self.model.USERNAME_FIELD}__in': keys})
+
+
 
 class User(AbstractBaseUser, PermissionsMixin):
     class Role(models.TextChoices):

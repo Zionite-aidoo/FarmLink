@@ -34,11 +34,19 @@ Then initialize the local database and start the site:
 ```powershell
 python manage.py migrate
 python manage.py seed_initial_data
-python manage.py createsuperuser
 python manage.py runserver
 ```
 
-Open <http://127.0.0.1:8000/>. Sign in and registration codes appear in the same console where `runserver` is running. For the first staff account, use an international phone number such as `+233241234567` with `createsuperuser`. Staff can review new produce at `/admin/`; listings stay hidden from buyers until approved. The development simulated MoMo option never contacts a payment network.
+Open <http://127.0.0.1:8000/>.
+
+### Operations Admin Sign-in (`/admin/`)
+
+The seed command automatically provisions the administrator superuser:
+- **Phone / Username:** `+233200000001` (or local format `0200000001`)
+- **Password:** `Admin123!`
+
+Alternatively, click **"⚡ Sign in with Phone OTP instead"** on the admin login page to sign in passwordlessly using the standard 6-digit verification code. Staff can review and approve newly listed produce, manage delivery zones, and monitor transactions at `/admin/`.
+
 
 ## Configuration
 

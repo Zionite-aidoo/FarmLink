@@ -74,3 +74,34 @@ class AccountsViewsTests(TestCase):
         self.assertEqual(user.full_name, 'Kofi Test')
         self.assertTrue(user.is_phone_verified)
 
+    def test_admin_login_with_password(self):
+        admin = User.objects.create_superuser(
+            phone='+233200000001',
+            full_name='Admin Test',
+            password='Admin123!',
+        )
+        # Test login with international format
+        res1 = self.client.post('/admin/login/', {
+            'username': '+233200000001',
+            'password': 'Admin123!',
+            'next': '/admin/',
+        })
+        self.assertEqual(res1.status_code, 302)
+        self.assertRedirects(res1, '/admin/')
+
+        # Logout and test with local 020... format
+        self.client.logout()
+        res2 = self.client.post('/admin/login/', {
+            'username': '0200000001',
+            'password': 'Admin123!',
+            'next': '/admin/',
+        })
+        self.assertEqual(res2.status_code, 302)
+        self.assertRedirects(res2, '/admin/')
+
+    def test_admin_login_page_renders(self):
+        response = self.client.get('/admin/login/')
+        self.assertEqual(response.status_code, 200)
+        self.assertContains(response, 'FarmLink Operations Admin')
+
+

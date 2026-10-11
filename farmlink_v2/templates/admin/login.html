@@ -1,0 +1,116 @@
+{% extends "admin/base_site.html" %}
+{% load i18n static %}
+
+{% block title %}{% if form.errors %}{% translate "Error:" %} {% endif %}{{ block.super }}{% endblock %}
+{% block extrastyle %}{{ block.super }}<link rel="stylesheet" href="{% static "admin/css/login.css" %}">
+{{ form.media }}
+<style>
+  .admin-dev-hint {
+    background: #e8f5e9;
+    border: 1px solid #81c784;
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin-bottom: 20px;
+    color: #1b5e20;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+  .admin-dev-hint strong {
+    color: #0d3813;
+  }
+  .admin-dev-hint code {
+    background: #c8e6c9;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: 600;
+    color: #1b5e20;
+  }
+  .admin-otp-btn {
+    display: block;
+    text-align: center;
+    background: #2e7d32;
+    color: #ffffff !important;
+    text-decoration: none;
+    font-weight: 600;
+    padding: 10px 14px;
+    border-radius: 6px;
+    margin-top: 10px;
+    transition: background 0.2s ease;
+  }
+  .admin-otp-btn:hover {
+    background: #1b5e20;
+  }
+</style>
+{% endblock %}
+
+{% block bodyclass %}{{ block.super }} login{% endblock %}
+
+{% block usertools %}{% endblock %}
+
+{% block nav-global %}{% endblock %}
+
+{% block nav-sidebar %}{% endblock %}
+
+{% block content_title %}{% endblock %}
+
+{% block nav-breadcrumbs %}{% endblock %}
+
+{% block content %}
+{% if form.errors and not form.non_field_errors %}
+<p class="errornote">
+{% blocktranslate count counter=form.errors.items|length %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktranslate %}
+</p>
+{% endif %}
+
+{% if form.non_field_errors %}
+{% for error in form.non_field_errors %}
+<p class="errornote">
+    {{ error }}
+</p>
+{% endfor %}
+{% endif %}
+
+<div id="content-main">
+
+  <div class="admin-dev-hint">
+    <strong>🌾 FarmLink Operations Admin</strong><br>
+    Sign in with your seeded administrator credentials:<br>
+    • <strong>Phone:</strong> <code>+233200000001</code> (or <code>0200000001</code>)<br>
+    • <strong>Password:</strong> <code>Admin123!</code>
+    <a href="{% url 'accounts:login' %}?next={% url 'admin:index' %}" class="admin-otp-btn">
+      ⚡ Sign in with Phone OTP instead
+    </a>
+  </div>
+
+{% if user.is_authenticated %}
+<p class="errornote">
+{% blocktranslate trimmed %}
+    You are authenticated as {{ username }}, but are not authorized to
+    access this page. Would you like to login to a different account?
+{% endblocktranslate %}
+</p>
+{% endif %}
+
+<form action="{{ app_path }}" method="post" id="login-form">{% csrf_token %}
+  <div class="form-row">
+    {{ form.username.errors }}
+    {{ form.username.label_tag }} {{ form.username }}
+  </div>
+  <div class="form-row">
+    {{ form.password.errors }}
+    {{ form.password.label_tag }} {{ form.password }}
+    <input type="hidden" name="next" value="{{ next|default:'/admin/' }}">
+  </div>
+  {% url 'admin_password_reset' as password_reset_url %}
+  {% if password_reset_url %}
+  <div class="password-reset-link">
+    <a href="{{ password_reset_url }}">{% translate 'Forgotten your login credentials?' %}</a>
+  </div>
+  {% endif %}
+  <div class="submit-row">
+    <input type="submit" value="{% translate 'Log in' %}">
+  </div>
+</form>
+
+</div>
+{% endblock %}

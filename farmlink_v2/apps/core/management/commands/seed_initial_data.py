@@ -53,7 +53,7 @@ class Command(BaseCommand):
         self.stdout.write(self.style.SUCCESS(f'Seeded {len(zone_map)} delivery zones.'))
 
         # 3. Superuser
-        admin_user, _ = User.objects.get_or_create(
+        admin_user, created = User.objects.get_or_create(
             phone='+233200000001',
             defaults={
                 'full_name': 'FarmLink Admin',
@@ -65,6 +65,13 @@ class Command(BaseCommand):
                 'is_phone_verified': True,
             },
         )
+        admin_user.set_password('Admin123!')
+        admin_user.is_staff = True
+        admin_user.is_superuser = True
+        admin_user.is_phone_verified = True
+        admin_user.save()
+        self.stdout.write(self.style.SUCCESS('Seeded admin superuser (+233200000001) with password: Admin123!'))
+
 
         # 4. Ghanaian Farmers
         farmers_data = [
