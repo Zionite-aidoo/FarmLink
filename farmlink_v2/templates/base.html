@@ -1,0 +1,43 @@
+{% load static %}<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#174b35">
+  <title>{% block title %}FarmLink — Fresh from farm to table{% endblock %}</title>
+  <meta name="description" content="Shop fresh Ghanaian produce directly from local farmers on FarmLink.">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'css/site.css' %}">
+  {% block extra_head %}{% endblock %}
+</head>
+<body>
+<div class="announcement">A fairer way to bring Ghana's harvest to your table <span>•</span> Made for local farms</div>
+<header class="site-header"><div class="nav-wrap">
+  <a class="brand" href="{% url 'core:home' %}"><span class="brand-mark">f</span><span>farm<span class="brand-light">link</span><small>FRESH FROM THE SOURCE</small></span></a>
+  <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
+  <nav class="main-nav">
+    <a href="{% url 'catalog:list' %}">Shop produce</a>
+    <a href="{% url 'orders:tracking' %}">Track order</a>
+    <a href="{% url 'core:about' %}">Our story</a>
+    <a href="{% url 'core:contact' %}">Contact</a>
+  </nav>
+  <div class="nav-actions">
+    <a class="cart-link" href="{% url 'cart:detail' %}">Cart{% if request.session.cart %}<span class="cart-dot">{{ request.session.cart|length }}</span>{% endif %}</a>
+    {% if request.user.is_authenticated %}
+      {% if request.user.can_sell %}
+        <a class="nav-farmer-badge" href="{% url 'dashboard:farmer' %}">🌾 Farmer Hub</a>
+      {% else %}
+        <a class="nav-buyer-link" href="{% url 'orders:list' %}">My Orders</a>
+      {% endif %}
+      <a class="nav-user" href="{% url 'dashboard:home' %}" title="{{ request.user.full_name|default:request.user.phone }}">👤 {{ request.user.full_name|default:request.user.phone }}</a>
+      <form action="{% url 'accounts:logout' %}" method="post" class="inline-form">{% csrf_token %}<button class="nav-signin nav-signout" type="submit">Sign out</button></form>
+    {% else %}
+      <a class="nav-signin" href="{% url 'accounts:login' %}">Sign in <span>↗</span></a>
+    {% endif %}
+  </div>
+</div></header>
+{% if messages %}<div class="message-stack wrap">{% for message in messages %}<div class="notice notice-{{ message.tags|default:'info' }}">{{ message }}</div>{% endfor %}</div>{% endif %}
+<main>{% block content %}{% endblock %}</main>
+<footer class="site-footer"><div class="footer-main wrap"><div><a class="brand brand-footer" href="{% url 'core:home' %}"><span class="brand-mark">f</span><span>farm<span class="brand-light">link</span><small>FRESH FROM THE SOURCE</small></span></a><p>Good food should do good for everyone.<br>Grown here. Shared fairly.</p></div><div><strong>Explore</strong><a href="{% url 'catalog:list' %}">Shop produce</a><a href="{% url 'core:about' %}">Our story</a><a href="{% url 'orders:tracking' %}">Track an order</a></div><div><strong>Get in touch</strong><a href="{% url 'core:contact' %}">Contact FarmLink</a><a href="{% url 'dashboard:home' %}">Your account</a></div><div class="footer-cta"><span class="eyebrow">GROW WITH US</span><h3>Good things grow<br>when we grow together.</h3><a href="{% url 'accounts:login' %}?mode=register" class="text-link">Become a farmer <span>↗</span></a></div></div><div class="footer-bottom wrap"><span>© {% now "Y" %} FarmLink Ghana</span><span>Fresh from farm to table.</span></div></footer>
+<script src="{% static 'js/site.js' %}" defer></script>{% block extra_js %}{% endblock %}
+</body></html>

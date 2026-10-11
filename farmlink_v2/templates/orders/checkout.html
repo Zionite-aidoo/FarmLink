@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Checkout | FarmLink{% endblock %}
+{% block content %}
+<section class="page-hero page-hero-small"><div class="wrap"><span class="eyebrow">GOOD FOOD, ON ITS WAY</span><h1>Let's get it <em>to you.</em></h1></div></section>
+<section class="wrap checkout-layout">
+  <form method="post" class="checkout-form">
+    {% csrf_token %}
+    <section class="checkout-section"><span class="step-number">01</span><div><h2>Where should we deliver?</h2><p>Share the details our farmer partners need to bring your order home.</p></div>
+      <div class="form-grid">
+        <label>Full name<input name="customer_name" autocomplete="name" value="{{ name }}" required></label>
+        <label>Phone number<input name="phone" type="tel" autocomplete="tel" value="{{ phone }}" required></label>
+        <label class="field-wide">Delivery address<textarea name="address" rows="3" required placeholder="House number, street, landmark">{{ address }}</textarea></label>
+        <label>City<input name="city" value="{{ city }}" required></label>
+        <label>Region<input name="region" value="{{ region }}"></label>
+        <label class="field-wide">Delivery area<select name="zone" required><option value="">Choose a delivery area</option>{% for zone in zones %}<option value="{{ zone.pk }}" {% if selected_zone == zone.pk|stringformat:'s' %}selected{% endif %}>{{ zone.name }} — GH₵ {{ zone.fee|floatformat:2 }} ({{ zone.estimated_window }})</option>{% endfor %}</select>{% if not zones %}<small>No delivery zones are active yet. Ask an administrator to add one.</small>{% endif %}</label>
+      </div>
+    </section>
+    <section class="checkout-section"><span class="step-number">02</span><div><h2>How would you like to pay?</h2><p>{% if mobile_money_enabled %}Mobile Money uses a local simulation. No real payment is taken.{% else %}Live Mobile Money is not configured yet. Pay on delivery for now.{% endif %}</p></div>
+      <div class="payment-options">
+        {% if mobile_money_enabled %}
+        <label class="payment-option"><input type="radio" name="method" value="mtn_momo" checked><span><b>MTN Mobile Money</b><small>Simulated in local development only</small></span></label>
+        <label class="payment-option"><input type="radio" name="method" value="vodafone_cash"><span><b>Telecel Cash</b><small>Simulated in local development only</small></span></label>
+        <label class="payment-option"><input type="radio" name="method" value="airteltigo"><span><b>AirtelTigo Money</b><small>Simulated in local development only</small></span></label>
+        {% endif %}
+        <label class="payment-option"><input type="radio" name="method" value="cash_on_delivery" {% if not mobile_money_enabled %}checked{% endif %}><span><b>Cash on delivery</b><small>Pay when your order arrives</small></span></label>
+      </div>
+    </section>
+    <button class="button button-dark button-full checkout-submit">Place my order <span>↗</span></button>
+  </form>
+  <aside class="order-summary checkout-summary"><span class="eyebrow">A QUICK RECAP</span><h2>Your basket.</h2>
+    {% for line in lines %}<div class="recap-item"><span>{{ line.quantity|floatformat:2 }} × {{ line.product.name }}</span><b>GH₵ {{ line.subtotal|floatformat:2 }}</b></div>{% endfor %}
+    <div class="summary-row"><span>Subtotal</span><b>GH₵ {{ subtotal|floatformat:2 }}</b></div><div class="summary-row"><span>Delivery</span><span>Added by area</span></div><div class="summary-total"><span>Total</span><b>GH₵ {{ subtotal|floatformat:2 }} + delivery</b></div><p class="summary-note">Your order goes directly to the people who grew it.</p>
+  </aside>
+</section>
+{% endblock %}

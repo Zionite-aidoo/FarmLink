@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Verify your phone | FarmLink{% endblock %}
+{% block content %}
+<section class="auth-shell">
+  <div class="auth-art"><span class="eyebrow">ONE QUICK CHECK</span><div class="auth-art-leaf">✳</div><h2>Almost there.<br><em>Just one more step.</em></h2><p>We want to make sure it's really you, and that your account stays safe.</p></div>
+  <div class="auth-panel"><a class="back-link" href="{% url 'accounts:login' %}">← Back to sign in</a><span class="eyebrow">CHECK YOUR PHONE</span><h1>Enter your<br><em>code.</em></h1><p class="auth-intro">We sent a six-digit code to {{ phone }}. In local development, check the server console.</p>
+    {% if dev_otp_hint %}<div class="notice notice-info" style="margin-bottom: 1rem;"><strong>Dev Code:</strong> <code style="font-size: 1.1em; letter-spacing: 2px;">{{ dev_otp_hint }}</code></div>{% endif %}
+    <form method="post" class="form-stack">{% csrf_token %}<label>Six-digit code<input name="code" inputmode="numeric" autocomplete="one-time-code" pattern="[0-9]{6}" maxlength="6" placeholder="000000" value="{{ dev_otp_hint }}" required autofocus></label><button class="button button-dark button-full">Verify and continue <span>↗</span></button></form>
+    <form method="post" action="{% url 'accounts:resend' %}" class="resend-form">{% csrf_token %}<button class="text-link">Request another code ↗</button></form>
+  </div>
+</section>
+{% endblock %}

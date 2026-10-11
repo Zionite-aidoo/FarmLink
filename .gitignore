@@ -1,7 +1,12 @@
 venv/
+.venv/
 __pycache__/
 *.pyc
 db.sqlite3
 .env
 media/
 staticfiles/
+tmp/
+.pytest_cache/
+server_stdout.txt
+server_stderr.txt
